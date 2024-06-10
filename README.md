@@ -83,7 +83,7 @@ Lazy lists only compute elements as they are needed, allowing for the definition
 
 ### MyLazyList implementation
 
-This week we’ll use `MyLazyList`, our own implementation of lazy lists in Scala.
+This week we’ll use `MyLazyList`, our own implementation of lazy lists in Scala. We also provide a skeleton for the exercise.
 
 The `MyLazyList` class has a lazy field pointing to a state, which can either be a `LZCons` (representing a non-empty list) or `LZNil` (representing an empty list). The class is described below:
 
