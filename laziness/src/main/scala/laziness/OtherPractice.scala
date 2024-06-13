@@ -14,7 +14,6 @@ object OtherPractice:
 
   lazy val palCodes2: MyLazyList[String] =
     // need to add base cases at the beginning
-    // need to add base cases at the beginning
     cons("0", cons("1", empty)).append(???)
 
   def nextLine(currentLine: List[Int]): List[Int] =
