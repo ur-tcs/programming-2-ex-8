@@ -97,7 +97,7 @@ enum MyLazyListState[+A]:
 ```
 <div style="text-align: right; color:grey"> 
 
-[laziness/src/main/scala/laziness/IntLazyLists.scala](./laziness/src/main/scala/laziness/IntLazyLists.scala)
+[laziness/src/main/scala/laziness/MyLazyList.scala](./laziness/src/main/scala/laziness/MyLazyList.scala)
 </div>
 
 We provide utility methods to help you create instances of `MyLazyList`:
@@ -108,6 +108,10 @@ def cons[A](elem: => A, tail: => MyLazyList[A]): MyLazyList[A] =
 
 def empty: MyLazyList[Nothing] = MyLazyList(() => LZNil)
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/MyLazyList.scala](./laziness/src/main/scala/laziness/MyLazyList.scala)
+</div>
 
 Also, here are the provided methods to interact with `MyLazyList`:
 
@@ -157,6 +161,12 @@ def get(i: Int): A =
         if i == 0 then x
         else xs.get(i - 1)
 ```
+
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/MyLazyList.scala](./laziness/src/main/scala/laziness/MyLazyList.scala)
+</div>
+
 >[!NOTE]
 >These operations will execute delayed computation through the lazy list. `size`, `foreach`, and `contains` ensure the whole lazy list is evaluated; hence, they do not terminate on infinite lazy lists.
 
@@ -181,6 +191,10 @@ def wrongTake(n: Int): MyLazyList[A] =
       case LZNil         => empty
       case LZCons(x, xs) => cons(x, xs.wrongTake(n - 1))
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/MyLazyList.scala](./laziness/src/main/scala/laziness/MyLazyList.scala)
+</div>
 
 `wrongTake` seems to work fine, but it has a problem: forcing the computing too early. The first element of the lazy list is evaluated immediately when `wrongTake` is called. If we call `wrongTake` on an infinite lazy list with complicated references to the first element, it may never terminate.
 
@@ -202,6 +216,11 @@ def take(n: Int): MyLazyList[A] =
 def drop(n: Int): MyLazyList[A] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/MyLazyList.scala](./laziness/src/main/scala/laziness/MyLazyList.scala)
+</div>
+
 Test these methods on infinite lazy lists and check whether they terminate.
 How does the behavior and result differ compared to a normal list?
 
@@ -221,6 +240,10 @@ def from(x: Int): MyLazyList[Int] =
 def range(x: Int, y: Int): MyLazyList[Int] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/IntLazyLists.scala](./laziness/src/main/scala/laziness/IntLazyLists.scala)
+</div>
 
 <details>
 <summary> Hint </summary>
@@ -248,6 +271,11 @@ def filter(p: A => Boolean): MyLazyList[A] =
 def zip[B](that: MyLazyList[B]): MyLazyList[(A, B)] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/MyLazyList.scala](./laziness/src/main/scala/laziness/MyLazyList.scala)
+</div>
+
 ### Building infinite lazy lists using recursive data ⭐️
 
 Let practice more infinite lazy lists using the operations you just implemented. In this section, we focus on building infinite lazy lists using recursive data.
@@ -266,6 +294,10 @@ val anonymList: MyLazyList[Int] = cons(1, anonymList)
 lazy val infiniteTwoes: MyLazyList[Int] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/IntLazyLists.scala](./laziness/src/main/scala/laziness/IntLazyLists.scala)
+</div>
 
 We can easily construct the lazy list of all natural numbers using from.
 
@@ -278,7 +310,11 @@ val naturalNumbers1: MyLazyList[Int] = from(0)
 ```Scala
 lazy val naturalNumbers2: MyLazyList[Int] =
   cons(0, ???)
-``` 
+```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/IntLazyLists.scala](./laziness/src/main/scala/laziness/IntLazyLists.scala)
+</div>
 
 #### Fibonacci’s magic show! 🔥
 
@@ -290,6 +326,10 @@ Implement the Fibonacci sequence by filling the hole using `zip` and `map`.
 lazy val fib: MyLazyList[Int] =
   cons(0, cons(1, ???))
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/IntLazyLists.scala](./laziness/src/main/scala/laziness/IntLazyLists.scala)
+</div>
 
 Be careful, if your implementation of the operations does not follow our rule strictly, you may get an infinite loop when you try to access the elements of `fib`.
 
@@ -307,6 +347,10 @@ def append(that: MyLazyList[A]): MyLazyList[A] =
 def flatMap[B](f: A => MyLazyList[B]): MyLazyList[B] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/MyLazyList.scala](./laziness/src/main/scala/laziness/MyLazyList.scala)
+</div>
 
 After you finish the implementation of `append`, you will notice how “efficient” it is compared to `++` on regular lists. `++` from regular lists has to traverse the first list to the end and build a new list. `append` on lazy lists only needs to traverse the first list when needed, spreading the cost over the entire process.
 
@@ -318,6 +362,10 @@ Write a lazy list of all non-empty strings using the characters “0” and “1
 lazy val codes: MyLazyList[String] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/OtherPractice.scala](./laziness/src/main/scala/laziness/OtherPractice.scala)
+</div>
 
 Using `codes`, write a lazy list of all possible non-empty palindromes of “0” and “1”. You may use the `.reverse` function defined on strings, as well as `filter`.
 
@@ -325,6 +373,10 @@ Using `codes`, write a lazy list of all possible non-empty palindromes of “0�
 lazy val palCodes: MyLazyList[String] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/OtherPractice.scala](./laziness/src/main/scala/laziness/OtherPractice.scala)
+</div>
 
 Computing the reverse of large numbers of strings and comparing them are expensive. Can you achieve the same result without filtering? The palindromes do not have to be in the same order.
 
@@ -349,6 +401,11 @@ lazy val palCodes2: MyLazyList[String] =
   // need to add base cases at the beginning
   cons("0", cons("1", empty)).append(???)
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/OtherPractice.scala](./laziness/src/main/scala/laziness/OtherPractice.scala)
+</div>
+
 ## More practices on infinite lazy lists
 
 Having explored the foundations of infinite lazy lists and their recursive nature, let’s transition to understanding specific sequences that can be represented using lazy lists.
@@ -378,12 +435,20 @@ Come to the exercise session and ask a tutor! The rule is kinda stupid.
 def nextLine(currentLine: List[Int]): List[Int] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/OtherPractice.scala](./laziness/src/main/scala/laziness/OtherPractice.scala)
+</div>
 
 3. Implement a lazy list `funSeq` which constructs this sequence.
 ```Scala
 lazy val funSeq: MyLazyList[List[Int]] =
   ???
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/OtherPractice.scala](./laziness/src/main/scala/laziness/OtherPractice.scala)
+</div>
 ### Sieve of Erathostenes ⭐️
 
 Sieve of Eratosthenes is an ancient technique to calculate prime numbers:
@@ -403,6 +468,10 @@ lazy val primeNumbers: MyLazyList[Int] =
   ???
   sieve(???)
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/IntLazyLists.scala](./laziness/src/main/scala/laziness/IntLazyLists.scala)
+</div>
 
 And thus, you are done for this week!
 
