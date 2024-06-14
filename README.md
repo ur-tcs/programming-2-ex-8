@@ -95,6 +95,10 @@ enum MyLazyListState[+A]:
   case LZCons(elem: A, tail: MyLazyList[A])
   case LZNil
 ```
+<div style="text-align: right; color:grey"> 
+
+[laziness/src/main/scala/laziness/IntLazyLists.scala](./laziness/src/main/scala/laziness/IntLazyLists.scala)
+</div>
 
 We provide utility methods to help you create instances of `MyLazyList`:
 
@@ -315,7 +319,7 @@ lazy val codes: MyLazyList[String] =
   ???
 ```
 
-Using `codes`, write a lazy list of all possible non-empty palindromes of “0” and “1”. You may use the `.reverse` function defined on strings.
+Using `codes`, write a lazy list of all possible non-empty palindromes of “0” and “1”. You may use the `.reverse` function defined on strings, as well as `filter`.
 
 ```Scala
 lazy val palCodes: MyLazyList[String] =
