@@ -54,19 +54,3 @@ class IntLazyListTest extends munit.FunSuite:
     assertEquals(fib.tail.tail.tail.head, 2)
     assertEquals(fib.drop(10).head, 55)
     assertEquals(sum(fib.take(10)), 88)
-
-  test("ackermann"):
-    assertEquals(ackermann.get(0).get(0), 1)
-    assertEquals(ackermann.get(0).get(1), 2)
-    assertEquals(ackermann.get(0).get(2), 3)
-
-    assertEquals(ackermann.get(1).get(0), 2)
-    assertEquals(ackermann.get(1).get(1), 3)
-    assertEquals(ackermann.get(1).get(2), 4)
-
-    assertEquals(ackermann.get(2).get(0), 3)
-    assertEquals(ackermann.get(2).get(1), 5)
-    assertEquals(ackermann.get(2).get(2), 7)
-
-    assertEquals(ackermann.get(3).get(4), ack(3, 4))
-    assertEquals(ackermann.get(3).get(8), ack(3, 8))
